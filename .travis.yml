@@ -16,6 +16,7 @@ before_install:
   - pip install pep8
   - pip install flake8
   - pip install pytest
+  - sudo apt-get install python-logilab-common
 
 before_script:
   - "flake8 --show-source --ignore=F811,W293,W391,W292 --max-line-length=79"
