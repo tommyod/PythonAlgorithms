@@ -4,13 +4,15 @@
 Description.
 """
 
-from ..sequences import fib
+from sequences import (fibonacci_order_n)
 
-
-def test_fib():
     
-    assert fib(0) == 1
-    assert fib(2) == 2
+def test_fibonacci_order_n():
+    
+    fon = fibonacci_order_n
+    assert list(fon(10, terms=5)) == [1, 1, 1, 1, 1]
+    assert list(fon(2, terms=5)) == [1, 1, 2, 3, 5]
+    assert list(fon(3, terms=10)) == [1, 1, 1, 3, 5, 9, 17, 31, 57, 105]
 
 
 if __name__ == "__main__":
