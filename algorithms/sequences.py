@@ -6,6 +6,11 @@ Description.
 
 def fib(n):
     """
+    
+    Examples
+    --------
+    >>> fib(5)
+    8
     """
     if n in (0, 1):
         return 1
