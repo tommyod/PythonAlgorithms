@@ -5,8 +5,9 @@ Description.
 """
 try:
     from ..sequences import (fibonacci_order_n)
-except:
+except ValueError:
     pass
+
 
     
 def test_fibonacci_order_n():
