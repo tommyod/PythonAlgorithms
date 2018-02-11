@@ -7,7 +7,6 @@ python:
   - "3.6"
   - "3.5"
   - "3.4"
-  - "3.3"
 
 notifications:
   email: false
@@ -15,8 +14,6 @@ notifications:
 before_install:
   - pip install pep8
   - pip install flake8
-  - pip install pytest
-  - sudo apt-get install python-logilab-common
 
 before_script:
   - "flake8 --show-source --ignore=F811,W293,W391,W292 --max-line-length=79"
