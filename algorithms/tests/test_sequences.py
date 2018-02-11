@@ -9,7 +9,6 @@ except ValueError:
     pass
 
 
-    
 def test_fibonacci_order_n():
     
     fon = fibonacci_order_n
