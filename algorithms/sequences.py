@@ -4,9 +4,9 @@
 Description.
 """
 
+
 def fib(n):
     """
-    
     Examples
     --------
     >>> fib(5)
@@ -21,4 +21,4 @@ def fib(n):
 if __name__ == "__main__":
     import pytest
     # --durations=10  <- May be used to show potentially slow tests
-    pytest.main(args = ['.', '--doctest-modules', '-v'])
+    pytest.main(args=['.', '--doctest-modules', '-v'])
