@@ -49,6 +49,9 @@ For more information, see this [list of algorithms](https://en.wikipedia.org/wik
 - [ ] BFS
 - [ ] Connected components
 - [ ] Minimum spanning tree
+- [ ] Checking if bipartite
+- [ ] Topological sorting of a DAG
+- [ ] Maximu flow / Ford-Fulkerson algorithm
 
 ## Mathematics
 
@@ -57,6 +60,9 @@ For more information, see this [list of algorithms](https://en.wikipedia.org/wik
 - [ ] Prime numbers
 - [ ] Prime factorization
 - [ ] Extended Euclidean algorithm
+- [ ] Optimal matrix multiplication
+- [ ] Primality testing
+- [ ] Generating primes
 
 ## Knapsack problems
 
@@ -64,11 +70,20 @@ For more information, see this [list of algorithms](https://en.wikipedia.org/wik
 - [ ] Knapsack with repetition
 - [ ] Knapsack without repetition
 
-## Strings
+## Strings and sequences
 
 - [ ] Longest common substring
 - [ ] KMP algorithm
 - [ ] Edit distance
 - [ ] Edit /w custom error function (i.e. wrong typing keyboard)
+- [ ] Running average
 
 ## Geometry
+
+- [ ] Closest pairs of points on the line
+- [ ] Closest pairs of points in the plane
+
+## Sorting and order statistics
+- [ ] Bucket sort
+- [ ] Mergesort
+- [ ] Median finding in linear time (p.215 in Cormen)
