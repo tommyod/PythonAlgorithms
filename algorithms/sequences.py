@@ -6,6 +6,17 @@ Description.
 
 import collections
 
+PRINTING = False
+
+
+def pprint(*args, **kwargs):
+    """
+    Printing which can be turned off or on globally. For debugging and
+    learning.
+    """
+    if PRINTING:
+        print(*args, **kwargs)
+
 
 def fibonacci_order_n(n, terms=5):
     """
@@ -56,6 +67,120 @@ def fibonacci_order_n(n, terms=5):
         yield next_value
         partial_sequence.popleft()
         partial_sequence.append(next_value)
+
+
+def maximums_from_left(iterable):
+    """
+    Yields (index, num) of the maximums as encountered from the left of the
+    sequence. This function answers the question "How many times has the stock
+    market been at an all-time high?"
+    
+    Algorithmic details
+    -------------------
+    Memory: O(1)
+    Time: O(n)
+    where n is the length of the sequence.
+    
+    Examples
+    --------
+    >>> sequence = [1, 3, 2, 4, 4, 3, 5]
+    >>> list(maximums_from_left(sequence))
+    [(0, 1), (1, 3), (3, 4), (4, 4), (6, 5)]
+    """
+    
+    # Convert to an iterable
+    iterable = iter(iterable)
+    
+    # Initialize DP-variable to the first value, which is the maximum so far
+    max_so_far = next(iterable)
+    yield 0, max_so_far
+    
+    # Iterate over the sequence, yield if higher than what's seen
+    for i, number in enumerate(iterable, 1):
+        if number >= max_so_far:
+            max_so_far = number
+            yield i, max_so_far
+
+
+def longest_conseq_inc_subsequence(iterable, only_length=True):
+    """
+    Returns the longest consequtive (non-monotonically) increasing subsequence
+    of an iterable. A non-monotonically increasing subsequence is a sequence
+    such as [0, 3, 4, 4, 6].
+    
+    Parameters
+    ----------
+    only_length : bool
+        Whether to return only the length of the subsequence, or the
+        subsequence itself.
+    
+    Algorithmic details
+    -------------------
+    Memory: O(n)
+    Time: O(n)
+    where n is the length of the sequence.
+    
+    Examples
+    --------
+    >>> sequence = iter([0, 1, 0, 1, 2, 3, 0, 1, 2])
+    >>> longest_conseq_inc_subsequence(sequence, only_length = False)
+    [0, 1, 2, 3]
+    
+    >>> sequence = [2, 4, 0, 1, 2, 3, -1, 4, 5, 6]
+    >>> longest_conseq_inc_subsequence(sequence, only_length = True)
+    4
+    """
+
+    iterable = iter(iterable)
+    
+    # Initialize the counters and the lists used to keep track of lengths
+    streak_seq_count = 1
+    longest_seq_count = 1
+    prev_value = next(iterable)
+    streak_seq = [prev_value]
+    longest_seq = [prev_value]
+    
+    # Go through the iterable
+    for value in iterable:
+        
+        # If the current value is greater than or equal to the previous one,
+        # add to the streak and increment the counter
+        if value >= prev_value:
+            streak_seq.append(value)
+            streak_seq_count += 1
+            
+        # If the current value is smaller than the previous one,
+        # restart the streak counter and the streak sequence
+        else:
+            streak_seq_count = 1
+            streak_seq = [value]
+            
+        # If the streak is longer than the longest sequence seen,
+        # store it. If not, then the previous longest is still the longest
+        if streak_seq_count > longest_seq_count:
+            longest_seq_count = streak_seq_count
+            longest_seq = streak_seq
+        
+        print_str = 'value{}. LCIS: {}, SSC: {}, streak: {}, longest : {}'
+        pprint(print_str.format(value, longest_seq_count, streak_seq_count,
+                                streak_seq, longest_seq))
+        
+        # Set the previous value to the current value, for the next loop
+        prev_value = value
+        
+    if only_length:
+        return longest_seq_count
+    else:
+        return longest_seq
+
+
+def longest_inc_subsequence(iterable, only_length=True):
+    """
+    TODO
+    0, 1, 2, 0, 1, 3, 4, 0, 5 -> 0, 1, 2, 3, 4, 5
+    
+    """
+    pass
 
 
 if __name__ == "__main__":
