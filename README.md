@@ -55,7 +55,7 @@ For more information, see this [list of algorithms](https://en.wikipedia.org/wik
 
 ## Mathematics
 
-- [ ] Fibonacci
+- [X] Fibonacci
 - [ ] Binomial coeffs
 - [ ] Prime numbers
 - [ ] Prime factorization
@@ -76,11 +76,11 @@ For more information, see this [list of algorithms](https://en.wikipedia.org/wik
 - [ ] KMP algorithm
 - [ ] Edit distance
 - [ ] Edit /w custom error function (i.e. wrong typing keyboard)
-- [ ] Running average
+- [X] Running average
 
 ## Geometry
 
-- [ ] Closest pairs of points on the line
+- [X] Closest pairs of points on the line
 - [ ] Closest pairs of points in the plane
 
 ## Sorting and order statistics
