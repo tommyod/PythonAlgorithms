@@ -70,7 +70,7 @@ For more information, see this [list of algorithms](https://en.wikipedia.org/wik
 - [ ] Knapsack with repetition
 - [ ] Knapsack without repetition
 
-## Strings and sequences
+## Sequences and strings
 
 - [ ] Longest common substring
 - [ ] KMP algorithm

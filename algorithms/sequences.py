@@ -183,6 +183,43 @@ def longest_inc_subsequence(iterable, only_length=True):
     pass
 
 
+def running_average(iterable):
+    """
+    Compute the running average of an iterable. After `k` items, the average
+    of the first `k` items are yielded.
+    
+    Parameters
+    ----------
+    iterable : iterable
+        An iterable object.
+    
+    Algorithmic details
+    -------------------
+    Memory: O(1)
+    Time: O(n)
+    where n is the length of the sequence.
+    
+    Examples
+    --------
+    >>> sequence = iter([1, 1, 1])
+    >>> list(running_average(sequence))
+    [1.0, 1.0, 1.0]
+    
+    >>> sequence = iter([1, 0, 5])
+    >>> list(running_average(sequence))
+    [1.0, 0.5, 2.0]
+    """
+    
+    iterable = iter(iterable)
+    
+    sum_so_far = 0
+    
+    # Iterate over all the elements
+    for num_items, item in enumerate(iterable, start=1):
+        sum_so_far += item
+        yield (sum_so_far / num_items)
+
+
 if __name__ == "__main__":
     import pytest
     # --durations=10  <- May be used to show potentially slow tests
