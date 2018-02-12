@@ -8,7 +8,8 @@ try:
     from ..sequences import (longest_conseq_inc_subsequence,
                              maximums_from_left,
                              fibonacci_order_n,
-                             running_average)
+                             running_mean,
+                             running_mean_bounded)
 except ValueError:
     pass
 
@@ -62,22 +63,40 @@ def test_fibonacci_order_n():
     assert list(fon(3, terms=10)) == [1, 1, 1, 3, 5, 9, 17, 31, 57, 105]
     
     
-def test_running_average():
+def test_running_mean():
     """
-    Test the running average.
+    Test the running mean.
     """
     
     # Test the function on list inputs
-    ra = running_average
-    assert list(ra([1, 1, 1])) == [1, 1, 1]
-    assert list(ra([2, 1, 1])) == [2, 3 / 2, 4 / 3]
-    assert list(ra([])) == []
-    assert list(ra([1])) == [1]
-    assert list(ra(iter([1, 2, 3, 4, 5]))) == [1, 3 / 2, 6 / 3, 10 / 4, 15 / 5]
+    rm = running_mean
+    assert list(rm([1, 1, 1])) == [1, 1, 1]
+    assert list(rm([2, 1, 1])) == [2, 3 / 2, 4 / 3]
+    assert list(rm([])) == []
+    assert list(rm([1])) == [1]
+    assert list(rm(iter([1, 2, 3, 4, 5]))) == [1, 3 / 2, 6 / 3, 10 / 4, 15 / 5]
     
     # Make sure the function works when an iterable is passed
     iterable = (1, 1, 1)
-    assert list(ra(iterable)) == [1, 1, 1]
+    assert list(rm(iterable)) == [1, 1, 1]
+    
+    
+def test_running_mean_bounded():
+    """
+    Test the running mean.
+    """
+    
+    # Test the function on list inputs
+    rm = running_mean_bounded
+    assert list(rm([1, 1, 1])) == [1, 1, 1]
+    assert list(rm([2, 1, 1])) == [2, 3 / 2, 4 / 3]
+    assert list(rm([])) == []
+    assert list(rm([1])) == [1]
+    assert list(rm(iter([1, 2, 3, 4, 5]))) == [1, 3 / 2, 6 / 3, 10 / 4, 15 / 5]
+    
+    # Make sure the function works when an iterable is passed
+    iterable = (1, 1, 1)
+    assert list(rm(iterable)) == [1, 1, 1]
 
 
 if __name__ == "__main__":

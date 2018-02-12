@@ -5,6 +5,8 @@ Description.
 """
 
 import collections
+import itertools
+import operator
 
 PRINTING = False
 
@@ -183,15 +185,71 @@ def longest_inc_subsequence(iterable, only_length=True):
     pass
 
 
-def running_average(iterable):
+def running_mean(iterable, kind='arithmetic'):
     """
-    Compute the running average of an iterable. After `k` items, the average
-    of the first `k` items are yielded.
+    Compute the running mean of an iterable. After `n` items, the mean
+    of the first `n` items are yielded.
     
     Parameters
     ----------
     iterable : iterable
         An iterable object.
+    kind : str
+        The type of mean to compute, either `arithmetic` or `geometric`.
+        
+    Algorithmic details
+    -------------------
+    Memory: O(1)
+    Time: O(n)
+    where n is the length of the sequence.
+    
+    Examples
+    --------
+    >>> sequence = iter([1, 2, 3])
+    >>> list(running_mean(sequence))
+    [1.0, 1.5, 2.0]
+    
+    >>> sequence = iter([1, 2, 3])
+    >>> list(running_mean(sequence, kind='geometric'))
+    [1.0, 1.4142135623730951, 1.8171205928321397]
+    
+    >>> sequence = iter([1, 0, 5])
+    >>> list(running_mean(sequence))
+    [1.0, 0.5, 2.0]
+    """
+    
+    iterable = iter(iterable)
+    
+    # Two kinds of means are implemented
+    if kind == 'arithmetic':
+        bin_op = operator.add
+        bin_op_repeated = operator.mul
+    elif kind == 'geometric':
+        bin_op = operator.mul
+        bin_op_repeated = operator.pow
+    else:
+        error_msg = 'Argument `kind` must be `arithmetic` or `geometric`.'
+        raise ValueError(error_msg)
+    
+    # Iterate over all the elements
+    generator = enumerate(itertools.accumulate(iterable, bin_op), start=1)
+    for term, accumulated in generator:
+        yield bin_op_repeated(accumulated, 1 / term)
+
+
+def running_mean_bounded(iterable, kind='arithmetic'):
+    """
+    Altenrative implementation of the running mean where intermediate
+    calculations are bounded. This implementation would be far more robust
+    when computing the geometric mean of a NumPy array, where overflow can
+    happen.
+    
+    Parameters
+    ----------
+    iterable : iterable
+        An iterable object.
+    kind : str
+        The type of mean to compute, either `arithmetic` or `geometric`.
     
     Algorithmic details
     -------------------
@@ -201,23 +259,43 @@ def running_average(iterable):
     
     Examples
     --------
-    >>> sequence = iter([1, 1, 1])
-    >>> list(running_average(sequence))
-    [1.0, 1.0, 1.0]
+    >>> sequence = iter([1, 2, 3])
+    >>> list(running_mean_bounded(sequence))
+    [1, 1.5, 2.0]
+    
+    >>> sequence = iter([1, 2, 3])
+    >>> list(running_mean_bounded(sequence, kind='geometric'))
+    [1, 1.4142135623730951, 1.8171205928321397]
     
     >>> sequence = iter([1, 0, 5])
-    >>> list(running_average(sequence))
-    [1.0, 0.5, 2.0]
+    >>> list(running_mean_bounded(sequence))
+    [1, 0.5, 1.9999999999999998]
     """
     
     iterable = iter(iterable)
     
-    sum_so_far = 0
+    # Two kinds of means are implemented
+    if kind == 'arithmetic':
+        bin_op = operator.add
+        bin_op_repeated = operator.mul
+    elif kind == 'geometric':
+        bin_op = operator.mul
+        bin_op_repeated = operator.pow
+    else:
+        error_msg = 'Argument `kind` must be `arithmetic` or `geometric`.'
+        raise ValueError(error_msg)
     
-    # Iterate over all the elements
-    for num_items, item in enumerate(iterable, start=1):
-        sum_so_far += item
-        yield (sum_so_far / num_items)
+    # The first value is just the first item in the iterable
+    mean = next(iterable)
+    yield mean
+    
+    # General formulas for computing means
+    # Arithmetic: S_n = S_{n-1} * {(n-1)/n} + a_n * {1/n}
+    # Geometric : S_n = S_{n-1} ^ {(n-1)/n} * a_n ^ {1/n}
+    for n, item in enumerate(iterable, start=2):
+        mean = bin_op(bin_op_repeated(mean, (n - 1) / n),
+                      bin_op_repeated(item, 1 / n))
+        yield mean
 
 
 if __name__ == "__main__":

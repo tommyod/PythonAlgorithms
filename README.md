@@ -39,7 +39,7 @@ contribute:
 4. Make your contribution to the project. Add tests, keep it clean, and follow 
    the rules outlined above.
 5. Install flake8 using `pip install flake8`, then run 
-   `flake8 --show-source --ignore=F811,W293,W391,W292`. 
+   `flake8 --show-source --ignore=F811,W293,W391,W292,W291`. 
    Make sure there are no errors.
 6. Run the tests using `pytest --doctest-modules -v`. Tests should run quickly, 
    and every algorithm should include at least 5 tests and 2 doctests.
