@@ -82,7 +82,7 @@ Some "competing" GitHub repos are [TheAlgorithms/Python](https://github.com/TheA
 - [ ] Prime numbers (generating primes)
 - [ ] Prime factorization (factorize an integer)
 - [ ] Extended Euclidean algorithm
-- [ ] Optimal matrix multiplication
+- [ ] Optimal matrix multiplication (p.362 Halim)
 - [ ] Primality testing (test if a number is prime)
 
 ## Knapsack problems
@@ -98,11 +98,16 @@ Some "competing" GitHub repos are [TheAlgorithms/Python](https://github.com/TheA
 - [ ] Edit distance
 - [ ] Edit /w custom error function (i.e. wrong typing keyboard)
 - [X] Running average
+- [ ] Coin change (Halim p.109)
+- [ ] Longest increasing subsequence
+- [ ] Maximal range sum (Halim p.103)
 
 ## Geometry
 
 - [X] Closest pairs of points on the line
 - [ ] Closest pairs of points in the plane
+- [ ] Interval covering (p.91 Halim)
+- [ ] Elements by maxnorm
 
 ## Sorting and order statistics
 - [ ] Bucket sort

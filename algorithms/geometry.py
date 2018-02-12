@@ -6,6 +6,8 @@ Created on Sun Feb 11 21:13:49 2018
 @author: tommy
 """
 
+import itertools
+
 PRINTING = False
 
 
@@ -53,6 +55,64 @@ def closest_pair_line(sequence):
     # Use the indices to get the actual values and return in canonical order
     answer_tuple = (sorted_v[i], sorted_v[j])
     return (min(answer_tuple), max(answer_tuple))
+
+
+def elements_of_maxnorm(free_rank, maxnorm_value):
+    """
+    Yield every element of Z^r such that max_norm(element) = maxnorm_value.
+    
+    Parameters
+    ----------
+    free_rank : int
+        The free rank (like dimension) of Z^r, i.e. free_rank = r.
+    maxnorm_value : int
+        The value of the maximum norm of the elements generated.
+        
+    Yields
+    -------
+    tuple
+        Elements in Z^r that satisfy the norm criterion.
+        
+    Algorithmic details
+    -------------------
+    Memory: O((2 * m + 1)^(f-1))
+    Time: O(f * (2m)^(f-1)) to compute every value
+    where f is the free rank and m is the maxnorm value.
+        
+    Examples
+    ---------
+    >>> free_rank = 3 # Like dimension
+    >>> maxnorm_value = 4
+    >>> elements = list(elements_of_maxnorm(free_rank, maxnorm_value))
+    >>> # Verify that the max norm is the correct value
+    >>> all(max(abs(k) for k in e) for e in elements)
+    True
+    
+    >>> # Verify the number of elements
+    >>> n = maxnorm_value
+    >>> len(elements) == ((2*n + 1)**free_rank - (2*n - 1)**free_rank)
+    True
+    """
+    if maxnorm_value == 0:
+        yield tuple([0] * free_rank)
+        return
+
+    # There are two 'walls' per dimension, front and back
+    for wall in range(free_rank):
+
+        # In each wall, the boundaries must shrink, two at a time
+        boundary_reduced = [1] * wall + [0] * (free_rank - wall - 1)
+
+        # The arguments into the cartesian product
+        prod_arg = [range(-maxnorm_value + k, maxnorm_value + 1 - k)
+                    for k in boundary_reduced]
+
+        # Take cartesian products along the boundaries of the r-dimensional
+        # cube. Yield from opposite sides of the hypercube.
+        for boundary_element in itertools.product(*prod_arg):
+            start, end = boundary_element[:wall], boundary_element[wall:]
+            yield start + (maxnorm_value,) + end
+            yield start + (-maxnorm_value,) + end
 
 
 if __name__ == "__main__":
