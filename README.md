@@ -65,15 +65,14 @@ Some "competing" GitHub repos are [TheAlgorithms/Python](https://github.com/TheA
 ## Graphs and networks
 
 - [ ] Representation: directed graphs
-- [ ] Representation: undirected graphs
-- [ ] Representation: networks (graphs with edges)
+- [X] Representation: undirected graphs (weight and unweighted)
 - [ ] DFS
 - [ ] BFS
 - [ ] Connected components
-- [ ] Minimum spanning tree
+- [X] Minimum spanning tree
 - [ ] Checking if bipartite
 - [ ] Topological sorting of a DAG
-- [ ] Maximu flow / Ford-Fulkerson algorithm
+- [ ] Maximum flow / Ford-Fulkerson algorithm
 
 ## Mathematics
 
@@ -107,7 +106,7 @@ Some "competing" GitHub repos are [TheAlgorithms/Python](https://github.com/TheA
 - [X] Closest pairs of points on the line
 - [ ] Closest pairs of points in the plane
 - [ ] Interval covering (p.91 Halim)
-- [ ] Elements by maxnorm
+- [X] Elements by maxnorm
 
 ## Sorting and order statistics
 - [ ] Bucket sort
