@@ -73,6 +73,25 @@ def test_unionfind_several():
     
     assert not u.in_same_set(2, 5)
     assert not u.in_same_set(4, 8)
+    
+    
+def test_unionfind_compression():
+    """
+    Test path compression and the union by rank.
+    """
+    
+    # Test the ranking
+    elements = list(range(100))
+    u = UnionFind(elements)
+    
+    for i in range(len(elements) - 1):
+        u.union(elements[i], elements[i + 1])
+        
+    assert max(u._rank.values()) == 1
+    
+    # Test path compression
+    parent_nodes = list(u._parent.values())
+    assert all(parent == parent_nodes[0] for parent in parent_nodes)
 
     
 if __name__ == "__main__":
