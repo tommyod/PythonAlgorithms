@@ -4,11 +4,11 @@
 Class for the union find algorithm.
 """
 
-import collections.abc
+from collections.abc import Container, Sized, Iterable
 import functools
 
 
-class UnionFind(collections.abc.Collection):
+class UnionFind(Container, Sized, Iterable):
     
     def __init__(self, iterable):
         """
