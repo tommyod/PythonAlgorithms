@@ -458,7 +458,6 @@ class UndirectedGraph(object):
         
         return vertices == vertices_found
     
-    
     def kruskal(self, start_vertex):
         """
         Implementation of Prim's algorithm for minimum spanning trees.
@@ -529,8 +528,7 @@ if __name__ == "__main__":
     weights = [4, 2, 4, 8, 6, 6, 9]
     g = UndirectedGraph(edges, weights)
     mst = g.kruskal(0)
-    assert mst == UndirectedGraph([(1, 0), (1, 2), (0, 3), (0, 4)], weights=[4, 2, 6, 6])
+    assert mst == UndirectedGraph([(1, 0), (1, 2), (0, 3), (0, 4)], 
+                                  weights=[4, 2, 6, 6])
 
-
-    
     
