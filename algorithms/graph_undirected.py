@@ -457,6 +457,58 @@ class UndirectedGraph(object):
         vertices_found = set(self.DFS(vertex_search_start))
         
         return vertices == vertices_found
+    
+    
+    def kruskal(self, start_vertex):
+        """
+        Implementation of Prim's algorithm for minimum spanning trees.
+        
+        Examples
+        --------
+        >>> # This example is from page 140 in Halim
+        >>> edges = [(0, 1), (1, 2), (0, 2), (2, 3), (0, 3), (0, 4), (3, 4)]
+        >>> weights = [4, 2, 4, 8, 6, 6, 9]
+        >>> g = UndirectedGraph(edges, weights)
+        >>> mst = g.minimum_spanning_tree(0)
+        >>> mst == UndirectedGraph([(1, 0), (1, 2), (0, 3), (0, 4)], 
+        ...                         weights=[4, 2, 6, 6])
+        True
+        
+        >>> # This example is from Wikipedia
+        >>> edges = [('A', 'B'), ('A', 'D'), ('D', 'B'), ('D', 'E'), 
+        ...         ('B', 'E'), ('B', 'C'), ('C', 'E'), ('F', 'E'), ('C', 'F')]
+        >>> weights = [1, 3, 5, 1, 1, 6, 5, 4, 2]
+        >>> g = UndirectedGraph(edges, weights)
+        >>> mst = g.minimum_spanning_tree('A')
+        >>> mst == UndirectedGraph([('E', 'D'), ('B', 'A'), ('E', 'F'), ('F', 
+        ...         'C'), ('E', 'B')], weights=[1, 1, 4, 2, 1])
+        True
+        """
+
+        # Initialize sets of seen variables to far in the algorithm
+        taken_edges = set()
+        taken_vertices = set()
+        all_vertices = set(self._edges.keys())
+        
+        queue = list((w, e) for (e, w) in self.edges(and_weights=True))
+        heapq.heapify(queue)
+        
+        while not (len(taken_vertices) == len(all_vertices)):
+            
+            # Pop off 
+            weight, (u, v) = heapq.heappop(queue)
+            
+            # If both are in the taken set, a cycle would've been created
+            if (u in taken_vertices) and (v in taken_vertices):
+                continue
+            
+            taken_vertices.update([u, v])
+            taken_edges.add((weight, (u, v)))
+
+        taken_edges = list(taken_edges)
+        mst_weights = [w for (w, e) in taken_edges]
+        mst_edges = [e for (w, e) in taken_edges]
+        return type(self)(mst_edges, mst_weights)
         
     
 if __name__ == "__main__":
@@ -471,5 +523,14 @@ if __name__ == "__main__":
     %load_ext line_profiler
     %lprun -f slow_functions.main slow_functions.main()
     """
+    
+    # This example is from page 140 in Halim
+    edges = [(0, 1), (1, 2), (0, 2), (2, 3), (0, 3), (0, 4), (3, 4)]
+    weights = [4, 2, 4, 8, 6, 6, 9]
+    g = UndirectedGraph(edges, weights)
+    mst = g.kruskal(0)
+    assert mst == UndirectedGraph([(1, 0), (1, 2), (0, 3), (0, 4)], weights=[4, 2, 6, 6])
+
+
     
     
