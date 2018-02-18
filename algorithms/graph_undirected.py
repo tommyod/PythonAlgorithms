@@ -6,7 +6,6 @@ Undirected graphs.
 
 import collections
 import heapq
-
 from algorithms.unionfind import UnionFind
 
 PRINTING = False
@@ -23,6 +22,7 @@ def pprint(*args, **kwargs):
 
 class UndirectedGraph(object):
     """
+    Class for undirected graphs.
     """
     
     def __init__(self, edges, weights=None):

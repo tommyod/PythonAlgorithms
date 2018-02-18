@@ -155,9 +155,7 @@ class UnionFind(Container):
         >>> new_root = unionfind.union(1, 5)
         >>> unionfind.in_same_set(1, 4)
         True
-        
         """
-        
         # If an iterable was passed as the only argument, reduce it
         if y is None:
             return functools.reduce(self.union, x)
