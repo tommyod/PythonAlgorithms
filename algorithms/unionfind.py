@@ -4,11 +4,11 @@
 Class for the union find algorithm.
 """
 
-from collections.abc import Container, Sized, Iterable
+from collections.abc import Container
 import functools
 
 
-class UnionFind(Container, Sized, Iterable):
+class UnionFind(Container):
     
     def __init__(self, iterable):
         """
@@ -65,33 +65,7 @@ class UnionFind(Container, Sized, Iterable):
         # If a KeyError is raised, then it was not found
         except KeyError:
             return False
-        
-    def __iter__(self):
-        """
-        Length (size) of the union find data structure.
-        
-        Examples
-        --------
-        >>> unionfind = UnionFind(['a', 'b'])
-        >>> for element in unionfind:
-        ...     print(element)
-        a
-        b
-        """
-        yield from self._parent.keys()
     
-    def __len__(self):
-        """
-        Length (size) of the union find data structure.
-        
-        Examples
-        --------
-        >>> unionfind = UnionFind(['a', 'b'])
-        >>> len(unionfind)
-        2
-        """
-        return len(self._parent.keys())
-            
     def add(self, iterable):
         """
         Add more items to the collection.
