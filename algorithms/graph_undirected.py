@@ -7,10 +7,7 @@ Undirected graphs.
 import collections
 import heapq
 
-try:
-    from algorithms.unionfind import UnionFind
-except ModuleNotFoundError:
-    from ..algorithms.unionfind import UnionFind
+from algorithms.unionfind import UnionFind
 
 PRINTING = False
 
