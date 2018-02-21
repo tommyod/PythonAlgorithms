@@ -529,6 +529,8 @@ class UndirectedGraph(object):
         """
         Djikstras algorithm for single source shortest paths.
         
+        TODO: Add `previous` dictionary for finding the actual path.
+        
         Djikstras famous algorithm 
         
         For more informaiton, see:
