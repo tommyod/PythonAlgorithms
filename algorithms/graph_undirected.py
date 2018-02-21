@@ -5,7 +5,7 @@ Undirected graphs.
 """
 
 import collections
-import heapq
+import heapq 
 from algorithms.unionfind import UnionFind
 
 PRINTING = False
@@ -524,8 +524,90 @@ class UndirectedGraph(object):
         mst_weights = [w for (w, e) in taken_edges]
         mst_edges = [e for (w, e) in taken_edges]
         return type(self)(mst_edges, mst_weights)
-        
     
+    def djikstra(self, start_vertex):
+        """
+        Djikstras algorithm for single source shortest paths.
+        
+        Djikstras famous algorithm 
+        
+        For more informaiton, see:
+        [1] https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+        
+        Algorithmic details
+        -------------------
+        Memory: O(E + V)
+        Time: O(E + V log(V))
+        where E is the number of edges, and V is the number of vertices.
+
+        Returns
+        ------
+        min_dists: Dictionary of shortest path values.
+            
+        Examples
+        --------
+        >>> # This example is from Wikipedia
+        >>> g = UndirectedGraph([(1, 3), (1, 2), (1, 6), (6, 5),
+        ...                      (3, 2), (3, 4), (2, 4), (5, 4)], 
+        ...                     weights = [9, 7, 14, 9, 10, 11, 15, 6])
+        >>> min_dists = g.djikstra(1)
+        >>> min_dists[1]
+        0
+        >>> min_dists[5]
+        23
+        >>> min_dists[4]
+        20
+        
+        >>> # A simple example, showing that minimum number of edges
+        >>> # does not equal shortest path in every case.
+        >>> g = UndirectedGraph([('A', 'B'), ('B', 'C'), ('C', 'D'), 
+        ...                     ('A', 'D')], weights = [1, 2, 3, 7])
+        >>> min_dists = g.djikstra('A')
+        >>> min_dists['D']
+        6
+        >>> min_dists['C']
+        3
+        """
+        
+        # Initialize a priority queue by distance to vertices
+        queue = [(0, start_vertex)]
+        heapq.heapify(queue)
+        
+        # Initialize the dictionary which will contain the answer
+        min_dists = collections.defaultdict(lambda: float('inf'))
+        min_dists[start_vertex] = 0
+        
+        # A set to keep track of visisted vertices
+        visited = set()
+        
+        # While there are elements left in the priority queue
+        while queue:
+            
+            # Pop off the vertex which is closest
+            (dist, vertex) = heapq.heappop(queue)
+            
+            # If it's seen, continue. If not, it's seen now
+            if vertex not in visited:
+                visited.add(vertex)
+            else:
+                continue
+            
+            # Go through every neighbor of the vertex
+            for neighbor, weight in self.neighbors(vertex, True):
+                
+                # The minimum distance to `neighbor` might be improved if
+                # the path going through `vertex` is smaller than the
+                # existing solution. This is the dynamic programming step.
+                min_dist_so_far = min_dists[neighbor]
+                possible_new_min = min_dists[vertex] + weight
+                min_dists[neighbor] = min(min_dist_so_far, possible_new_min)
+                
+                # Push to the queue. Prioritize by distance.
+                heapq.heappush(queue, (min_dists[neighbor], neighbor))
+            
+        return min_dists
+                
+
 if __name__ == "__main__":
     import pytest
     # --durations=10  <- May be used to show potentially slow tests
@@ -538,14 +620,3 @@ if __name__ == "__main__":
     %load_ext line_profiler
     %lprun -f slow_functions.main slow_functions.main()
     """
-    
-    # This example is from page 140 in Halim
-    edges = [(1, 2), (3, 4), (1, 3), (2, 4)]
-    weights = [1, 2, 8, 10]
-    g = UndirectedGraph(edges, weights)
-    mst = g.kruskal()
-    print(mst)
-    assert mst == UndirectedGraph([(1, 2), (3, 4), (1, 3)], 
-                                  weights=[1, 2, 8])
-
-    

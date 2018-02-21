@@ -49,6 +49,17 @@ def test_minimum_spanning_tree():
                                   weights=[2, 2, 1])
     
 
+def test_djikstra():
+    """
+    Test Djikstras algorithm.
+    """
+    # TODO: Create tests. See
+    # http://math.mit.edu/~rothvoss/18.304.3PM/Presentations/1-Melissa.pdf
+    # https://www.inf.ed.ac.uk/teaching/courses/dmmr/slides/16-17/lec-shortest-coloring.pdf
+    # http://www.reviewmylife.co.uk/data/2008/0715/dijkstras-graph.gif
+    assert 2 + 2 == 4
+
+
 if __name__ == "__main__":
     import pytest
     # --durations=10  <- May be used to show potentially slow tests
