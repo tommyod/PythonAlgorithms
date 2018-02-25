@@ -13,8 +13,8 @@ PRINTING = False
 
 def closest_pair_line(sequence):
     """
-    Return the two closest points in a sequence, i.e. the two points such that
-    their difference is minimized.
+    Return the indices of the two closest points in a sequence, i.e. the two 
+    points such that their difference is minimized.
     
     Algorithmic details
     -------------------
@@ -25,10 +25,10 @@ def closest_pair_line(sequence):
     Examples
     --------
     >>> closest_pair_line([0, 25, 50, 22, 75, 100])
-    (22, 25)
+    (1, 3)
     
     >>> closest_pair_line([100, 0, -100, 50, -50, -98])
-    (-100, -98)
+    (2, 5)
     
     References
     ----------
@@ -52,8 +52,8 @@ def closest_pair_line(sequence):
     # Compute the minimum value and the minimal indices
     min_value, (i, j) = min(diff_gen)
     
-    # Use the indices to get the actual values and return in canonical order
-    answer_tuple = (sorted_v[i], sorted_v[j])
+    # Use the indices to look up the unsorted indices
+    answer_tuple = (sorted_seq[i][1], sorted_seq[j][1])
     return (min(answer_tuple), max(answer_tuple))
 
 
@@ -119,3 +119,5 @@ if __name__ == "__main__":
     import pytest
     # --durations=10  <- May be used to show potentially slow tests
     pytest.main(args=['.', '--doctest-modules', '-v'])
+    
+    
