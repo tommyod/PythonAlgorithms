@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Undirected graphs.
+Undirected graphs - representation and computation/algorithms.
 """
 
 import collections

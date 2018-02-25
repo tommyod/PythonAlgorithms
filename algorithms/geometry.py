@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun Feb 11 21:13:49 2018
-
-@author: tommy
+Geometry algorithms.
 """
 
 import itertools
-
-PRINTING = False
 
 
 def closest_pair_line(sequence):

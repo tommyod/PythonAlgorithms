@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Class for the union find algorithm.
+Class for the unionfind algorithm.
 """
 
 from collections.abc import Container
@@ -189,5 +189,3 @@ if __name__ == "__main__":
     import pytest
     # --durations=10  <- May be used to show potentially slow tests
     pytest.main(args=['.', '--doctest-modules', '-v'])
-    
-    
