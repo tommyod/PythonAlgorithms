@@ -32,7 +32,7 @@ class RQT(object):
         >>> rqt = RQT([6, 2, 4, 9], lambda i, j: max(i, j), -float('inf'))
         >>> rqt.query(0, 1)
         6
-        >>> rqt.query(1, 4)
+        >>> rqt.query(1, 3)
         9
         """
         # Store input information
@@ -64,10 +64,24 @@ class RQT(object):
     def update(self, index, value):
         """
         Update a value in the range query tree.
+        
+        Examples
+        --------
+        >>> rqt = RQT([6, 2, 4, 9])
+        >>> rqt
+        [6, 2, 4, 9]
+        >>> rqt.update(1, 10)
+        >>> rqt
+        [6, 10, 4, 9]
+        >>> # Indices must be withing range
+        >>> rqt.update(4, 10)
+        Traceback (most recent call last):
+        ...
+        IndexError: list assignment index out of range
         """
-        print(repr(list(enumerate(self.seq))))
+        if not (0 <= index < self._original_length):
+            raise IndexError('list assignment index out of range')
         i = self._internal_index(index)
-        print(i)
         
         # Update the node
         self.seq[i] = value
@@ -88,7 +102,26 @@ class RQT(object):
     def query(self, i, j):
         """
         Query for the function over seq[i:j+1].
+        
+        Examples
+        --------
+        >>> rqt = RQT([6, 2, 4, 9])
+        >>> rqt.query(0, 1)
+        8
+        >>> rqt.query(1, 2)
+        6
         """
+        
+        # Perform an input check
+        if not (0 <= i < self._original_length):
+            raise IndexError('list index out of range')
+            
+        if not (0 <= j < self._original_length):
+            raise IndexError('list index out of range')
+            
+        if j < i:
+            raise IndexError('start index cannot be greater than end index')
+            
         # Query the top node
         return self._query_node(1, i, j)
         

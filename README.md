@@ -122,6 +122,7 @@ Some "competing" GitHub repos are [TheAlgorithms/Python](https://github.com/TheA
 ## Misc
 
 - [X] Union Find (used in Kruskal's algorithm)
+- [X] Range query tree 
 
 
 

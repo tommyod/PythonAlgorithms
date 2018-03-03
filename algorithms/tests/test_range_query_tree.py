@@ -3,6 +3,7 @@
 """
 Test sequence algorithms.
 """
+import pytest
 
 try:
     from ..range_query_tree import RQT
@@ -79,6 +80,36 @@ class TestRQT(object):
         
         assert rqt.query(0, 1) == 8
         assert rqt.query(3, 5) == 9
+        
+    def test_indices_updating(self):
+        """
+        Make sure only correct indices can be updated.
+        """
+        rqt = RQT([1, 2, 3])
+        
+        with pytest.raises(IndexError):
+            rqt.update(-1, 10)
+            
+        with pytest.raises(IndexError):
+            rqt.update(3, 10)
+            
+    def test_indices_query(self):
+        """
+        Make sure query indices make sense.
+        """
+        rqt = RQT([1, 2, 3])
+        
+        with pytest.raises(IndexError):
+            rqt.query(-1, 2)
+            
+        with pytest.raises(IndexError):
+            rqt.query(1, 3)
+            
+        with pytest.raises(IndexError):
+            rqt.query(-5, 5)
+            
+        with pytest.raises(IndexError):
+            rqt.query(2, 1)
 
 
 if __name__ == "__main__":
