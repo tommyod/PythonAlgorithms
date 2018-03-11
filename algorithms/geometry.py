@@ -109,6 +109,51 @@ def elements_of_maxnorm(free_rank, maxnorm_value):
             start, end = boundary_element[:wall], boundary_element[wall:]
             yield start + (maxnorm_value,) + end
             yield start + (-maxnorm_value,) + end
+            
+            
+def area_of_polygon(list_of_points):
+    """
+    Return the signed area of a simple polygon.
+    
+    See http://geomalgorithms.com/a01-_area.html for a discussion.
+    
+    Parameters
+    ----------
+    list_of_points : list
+        A list of points in counterlockwise order, 
+        i.e. [(0, 0), (1, 0), (1, 1)].
+        
+    Returns
+    -------
+    float
+        The signed area. Positive if the points are given in counter clockwise
+        order. Negative if the points are given in clockwise order.
+        
+    Algorithmic details
+    -------------------
+    Memory: O(1)
+    Time: O(n)
+    where n is the number of points.
+        
+    Examples
+    ---------
+    >>> points = [(0, 0), (1, 0), (1, 1)]
+    >>> area_of_polygon(points)
+    0.5
+    
+    >>> points = [(0, 1), (3, 2), (2, 5), (-1, 6), (-2, 3)]
+    >>> area_of_polygon(points)
+    16.0
+    """
+    
+    def area_of_segment(arr, i, n):
+        """
+        Length of a single segment in the sum.
+        """
+        return arr[i % n][0] * (arr[(i + 1) % n][1] - arr[(i - 1) % n][1])
+    
+    n = len(list_of_points)
+    return sum(area_of_segment(list_of_points, i, n) for i in range(n)) / 2
 
 
 if __name__ == "__main__":
