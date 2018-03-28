@@ -23,6 +23,7 @@ def pprint(*args, **kwargs):
 def fibonacci_order_n(n, terms=5):
     """
     Yields the first t terms in the generalized Fibonacci numbers of order n.
+    
     We define the generalized Fibonacci numbers of order n by the recursion:
     F(0 ... n) = 1
     F(i) = F(i - 1) + F(i - 2) + F(i - n)
