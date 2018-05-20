@@ -126,11 +126,11 @@ def longest_conseq_inc_subsequence(iterable, only_length=True):
     Examples
     --------
     >>> sequence = iter([0, 1, 0, 1, 2, 3, 0, 1, 2])
-    >>> longest_conseq_inc_subsequence(sequence, only_length = False)
+    >>> longest_conseq_inc_subsequence(sequence, only_length=False)
     [0, 1, 2, 3]
     
     >>> sequence = [2, 4, 0, 1, 2, 3, -1, 4, 5, 6]
-    >>> longest_conseq_inc_subsequence(sequence, only_length = True)
+    >>> longest_conseq_inc_subsequence(sequence, only_length=True)
     4
     """
 
@@ -175,15 +175,6 @@ def longest_conseq_inc_subsequence(iterable, only_length=True):
         return longest_seq_count
     else:
         return longest_seq
-
-
-def longest_inc_subsequence(iterable, only_length=True):
-    """
-    TODO
-    0, 1, 2, 0, 1, 3, 4, 0, 5 -> 0, 1, 2, 3, 4, 5
-    
-    """
-    pass
 
 
 def running_mean(iterable, kind='arithmetic'):

@@ -25,10 +25,6 @@ def closest_pair_line(sequence):
     
     >>> closest_pair_line([100, 0, -100, 50, -50, -98])
     (2, 5)
-    
-    References
-    ----------
-    [1] ...
     """
     len_sequence = len(sequence)
     

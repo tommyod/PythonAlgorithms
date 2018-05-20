@@ -9,9 +9,8 @@ import itertools
 
 def knapsack_without_repetition(capacity, values, weights=None):
     """
-    Uses dynamic programming to compute the maximal possible value of the 
-    content of a knapsack. The content is chosen from a set of items, where
-    each item has a weight and a value. 
+    Find the optimal set of items with values and weights, to fill a knapsack
+    to maximal capacity.
     
     The knapsack has a capacity which limits our choice of items in such a way 
     that the sum of the items' weights can not exceed the knapsack capacity.
@@ -32,8 +31,8 @@ def knapsack_without_repetition(capacity, values, weights=None):
     
     Algorithmic details
     -------------------
-    Memory: O(Wn)
-    Time: O(Wn)
+    Memory: O(W * n)
+    Time: O(W * n)
     where W is the capacity of the knapsack and n is the number of items.
     
     Examples

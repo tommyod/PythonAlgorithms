@@ -26,7 +26,8 @@ class UndirectedGraph(object):
     """
     
     def __init__(self, edges, weights=None):
-        """Initialize a new undirected graph lists of edges and weights.
+        """
+        Initialize a new undirected graph from lists of edges and weights.
 
         The undirected graph is represented using a dictionary.
 
@@ -54,7 +55,6 @@ class UndirectedGraph(object):
         >>> g3 = UndirectedGraph(edges)
         >>> g2 == g3
         True
-
         """
         
         # Initialize a default dictionary representing the edges and weights
@@ -98,7 +98,8 @@ class UndirectedGraph(object):
         return self._weights[frozenset(edge)]
                 
     def edges(self, and_weights=False):
-        """Yield the edges in the graph, and alternatively the weights too.
+        """
+        Yield the edges in the graph, and alternatively the weights too.
         
         Parameters
         ----------
@@ -153,7 +154,8 @@ class UndirectedGraph(object):
                     yield (vertex, neighbor)
                 
     def __eq__(self, other):
-        """Test if two undirected graphs are equal.
+        """
+        Test if two undirected graphs are equal.
         
         Two graphs are equal iff they share the same
         dictionary representation.
@@ -207,7 +209,7 @@ class UndirectedGraph(object):
         """
         edges, weights = [], []
         
-        # Here's a microoptimization
+        # This is a microoptimization
         edges_append = edges.append
         weights_append = weights.append
         
@@ -296,7 +298,6 @@ class UndirectedGraph(object):
             
         except KeyError:
             # Silently ignore errors where the vertex is not in the dictionary
-            # TODO: Reconsider this behaviour?
             pass
         
         finally:
@@ -374,8 +375,7 @@ class UndirectedGraph(object):
         
     def _search(self, start_vertex, kind='BFS'):
         """
-        General search algorithm.
-        TODO
+        General search algorithm for either BFS or DFS.
         """
         
         if kind == 'BFS':
@@ -406,15 +406,13 @@ class UndirectedGraph(object):
     
     def BFS(self, start_vertex):
         """
-        BFS, i.e. first in - last out.
-        TODO
+        Breadth first search, i.e. first in - last out.
         """
         yield from self._search(start_vertex, kind='BFS')
             
     def DFS(self, start_vertex):
         """
-        DFS, i.e. first in - first out.
-        TODO
+        Depth first search, i.e. first in - first out.
         """
         yield from self._search(start_vertex, kind='DFS')
         
@@ -529,9 +527,8 @@ class UndirectedGraph(object):
         """
         Djikstras algorithm for single source shortest paths.
         
-        TODO: Add `previous` dictionary for finding the actual path.
-        
-        Djikstras famous algorithm 
+        Currently, this algorithm only returns the shortest path value,
+        not the actual shortest path.
         
         For more informaiton, see:
         [1] https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
