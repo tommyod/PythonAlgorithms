@@ -56,6 +56,7 @@ def prime_factors(number):
             yield number
             number = 1
 
+
 def prime_sieve(n):
     """
     Return a list of all primes smaller than or equal to n.

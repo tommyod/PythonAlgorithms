@@ -36,7 +36,6 @@ def test_prime_sieve():
     assert prime_sieve(11) == [2, 3, 5, 7, 11]
     
 
-
 def test_prime_factors():
     """
     Test longest consequtive increasing subsequence.
